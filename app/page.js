@@ -109,8 +109,8 @@ export default function Home() {
         </h1>
 
         {/* Inputs */}
-        <div className="space-y-2.5 mb-5">
-          <div>
+        <div className="flex gap-2.5 mb-5">
+          <div className="flex-1">
             <label htmlFor="numDice" className="block text-xs font-semibold text-black mb-1 uppercase tracking-wide">
               Number of Dice
             </label>
@@ -127,7 +127,7 @@ export default function Home() {
             />
           </div>
 
-          <div>
+          <div className="flex-1">
             <label htmlFor="numSides" className="block text-xs font-semibold text-black mb-1 uppercase tracking-wide">
               Number of Sides
             </label>
