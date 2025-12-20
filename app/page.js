@@ -109,11 +109,11 @@ export default function Home() {
         </h1>
 
         {/* Inputs */}
-        <div className="mb-5">
-          <label className="block text-xs font-semibold text-black mb-1 uppercase tracking-wide">
-            Roll
-          </label>
-          <div className="w-full px-3 py-2 border-2 border-black bg-white rounded-md flex items-center gap-2">
+        <div className="space-y-2.5 mb-5">
+          <div>
+            <label htmlFor="numDice" className="block text-xs font-semibold text-black mb-1 uppercase tracking-wide">
+              Number of Dice
+            </label>
             <input
               id="numDice"
               type="number"
@@ -123,10 +123,14 @@ export default function Home() {
               onChange={handleDiceChange}
               onBlur={handleDiceBlur}
               onKeyDown={handleDiceKeyDown}
-              className="w-16 text-base text-black focus:outline-none bg-transparent text-center"
+              className="w-full px-3 py-2 text-base border-2 border-black bg-white text-black focus:outline-none transition-all rounded-md"
             />
-            <span className="text-sm text-black/60">dice</span>
-            <span className="text-black/40">×</span>
+          </div>
+
+          <div>
+            <label htmlFor="numSides" className="block text-xs font-semibold text-black mb-1 uppercase tracking-wide">
+              Number of Sides
+            </label>
             <input
               id="numSides"
               ref={sidesInputRef}
@@ -137,9 +141,8 @@ export default function Home() {
               onChange={handleSidesChange}
               onBlur={handleSidesBlur}
               onKeyDown={handleSidesKeyDown}
-              className="w-16 text-base text-black focus:outline-none bg-transparent text-center"
+              className="w-full px-3 py-2 text-base border-2 border-black bg-white text-black focus:outline-none transition-all rounded-md"
             />
-            <span className="text-sm text-black/60">sides</span>
           </div>
         </div>
 
