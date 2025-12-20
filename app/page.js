@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function Home() {
   const [numDice, setNumDice] = useState(2);
@@ -8,6 +8,8 @@ export default function Home() {
   const [currentRoll, setCurrentRoll] = useState(null);
   const [rollHistory, setRollHistory] = useState([]);
   const [selectedRoll, setSelectedRoll] = useState(null);
+
+  const sidesInputRef = useRef(null);
 
   const clamp = (value, min, max) => {
     const num = parseInt(value) || min;
@@ -60,6 +62,20 @@ export default function Home() {
     }
   };
 
+  const handleDiceKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      sidesInputRef.current?.focus();
+    }
+  };
+
+  const handleSidesKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      rollDice();
+    }
+  };
+
   const rollDice = () => {
     const diceCount = numDice === '' ? 1 : parseInt(numDice);
     const sidesCount = numSides === '' ? 2 : parseInt(numSides);
@@ -106,6 +122,7 @@ export default function Home() {
               value={numDice}
               onChange={handleDiceChange}
               onBlur={handleDiceBlur}
+              onKeyDown={handleDiceKeyDown}
               className="w-full px-3 py-2 text-base border-2 border-black bg-white text-black focus:outline-none transition-all rounded-md"
             />
           </div>
@@ -116,12 +133,14 @@ export default function Home() {
             </label>
             <input
               id="numSides"
+              ref={sidesInputRef}
               type="number"
               min="2"
               max="100"
               value={numSides}
               onChange={handleSidesChange}
               onBlur={handleSidesBlur}
+              onKeyDown={handleSidesKeyDown}
               className="w-full px-3 py-2 text-base border-2 border-black bg-white text-black focus:outline-none transition-all rounded-md"
             />
           </div>
