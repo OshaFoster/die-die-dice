@@ -21,7 +21,9 @@ export default function Home() {
       return rolls.join(' • ');
     }
     if (includeDiceCount) {
-      return `${rolls.length} dice • min ${Math.min(...rolls)} • max ${Math.max(...rolls)}`;
+      return `${rolls.length} dice • min ${Math.min(...rolls)} • max ${Math.max(
+        ...rolls
+      )}`;
     }
     return `min ${Math.min(...rolls)} • max ${Math.max(...rolls)}`;
   };
@@ -101,47 +103,52 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4">
-      <main className="w-full max-w-md">
+    <div className='min-h-screen  flex items-center justify-center px-4'>
+      <main className='w-full max-w-md'>
         {/* Title */}
-        <h1 className="text-4xl font-bold text-black mb-12 text-center tracking-tight finger-paint-regular">
+        <h1 className='text-4xl font-bold text-black mb-8 md:mb-12 text-center tracking-tight finger-paint-regular'>
           Die, Die, Dice!
         </h1>
-
         {/* Inputs */}
-        <div className="flex gap-2.5 mb-5">
-          <div className="flex-1">
-            <label htmlFor="numDice" className="block text-xs font-semibold text-black mb-1 uppercase tracking-wide">
+        <div className='flex gap-2.5 mb-5'>
+          <div className='flex-1'>
+            <label
+              htmlFor='numDice'
+              className='block text-xs font-semibold text-black mb-1 uppercase tracking-wide'
+            >
               Number of Dice
             </label>
             <input
-              id="numDice"
-              type="number"
-              min="1"
-              max="50"
+              id='numDice'
+              type='number'
+              min='1'
+              max='50'
               value={numDice}
               onChange={handleDiceChange}
               onBlur={handleDiceBlur}
               onKeyDown={handleDiceKeyDown}
-              className="w-full px-3 py-2 text-base border-2 border-black bg-white text-black focus:outline-none transition-all rounded-md"
+              className='w-full px-3 py-2 text-base border-2 border-black  text-black focus:outline-none transition-all rounded-md'
             />
           </div>
 
-          <div className="flex-1">
-            <label htmlFor="numSides" className="block text-xs font-semibold text-black mb-1 uppercase tracking-wide">
+          <div className='flex-1'>
+            <label
+              htmlFor='numSides'
+              className='block text-xs font-semibold text-black mb-1 uppercase tracking-wide'
+            >
               Number of Sides
             </label>
             <input
-              id="numSides"
+              id='numSides'
               ref={sidesInputRef}
-              type="number"
-              min="2"
-              max="100"
+              type='number'
+              min='2'
+              max='100'
               value={numSides}
               onChange={handleSidesChange}
               onBlur={handleSidesBlur}
               onKeyDown={handleSidesKeyDown}
-              className="w-full px-3 py-2 text-base border-2 border-black bg-white text-black focus:outline-none transition-all rounded-md"
+              className='w-full px-3 py-2 text-base border-2 border-black  text-black focus:outline-none transition-all rounded-md'
             />
           </div>
         </div>
@@ -149,37 +156,39 @@ export default function Home() {
         {/* Roll Button */}
         <button
           onClick={rollDice}
-          className="w-full py-5 bg-black text-white text-2xl font-bold tracking-wider active:bg-zinc-800 active:scale-[0.98] active:translate-y-[1.5px] transition-all duration-100 mb-6 rounded-xl finger-paint-regular focus:outline-none"
+          className='w-full py-5 bg-black text-white text-2xl font-bold tracking-wider active:bg-zinc-800 active:scale-[0.98] active:translate-y-[1.5px] transition-all duration-100 mb-6 rounded-xl finger-paint-regular focus:outline-none'
         >
           Roll
         </button>
 
         {/* Current Roll Display - Always visible */}
-        <div className="mb-7 border-4 border-black p-6 rounded-xl">
-          <div className="text-center">
-            <div className="text-xs font-medium text-black/60 mb-3 uppercase tracking-widest">
+        <div className='mb-7 border-4 border-black p-6 rounded-xl'>
+          <div className='text-center'>
+            <div className='text-xs font-medium text-black/60 mb-3 uppercase tracking-widest'>
               {currentRoll ? currentRoll.config : '\u00A0'}
             </div>
-            <div className="text-8xl font-bold mb-4 leading-none finger-paint-regular">
+            <div className='text-8xl font-bold mb-4 leading-none finger-paint-regular'>
               <span
                 key={currentRoll?.timestamp}
-                className={currentRoll ? 'text-accent animate-pop-in' : 'text-black/10'}
+                className={
+                  currentRoll ? 'text-accent animate-pop-in' : 'text-black/10'
+                }
               >
                 {currentRoll ? currentRoll.total : '—'}
               </span>
             </div>
-            <div className="text-xs text-black/40 font-mono">
+            <div className='text-xs text-black/40 font-mono'>
               {currentRoll ? formatRollBreakdown(currentRoll.rolls) : '\u00A0'}
             </div>
           </div>
         </div>
 
         {/* Roll History - Always visible */}
-        <div className="mb-8">
-          <h2 className="text-xs font-semibold text-black mb-3 uppercase tracking-widest">
+        <div className='mb-6 md:mb-8'>
+          <h2 className='text-xs font-semibold text-black mb-3 uppercase tracking-widest'>
             Previous Rolls
           </h2>
-          <div className="space-y-2">
+          <div className='space-y-2'>
             {[...Array(5)].map((_, index) => {
               const roll = rollHistory[index];
               return (
@@ -193,18 +202,28 @@ export default function Home() {
                       ? 'border border-black/30'
                       : 'border border-black/10'
                   } ${roll ? 'cursor-pointer active:scale-[0.99]' : ''}`}
-                  style={{ opacity: roll ? (index === 0 ? 1 : Math.max(0.3, 1 - index * 0.15)) : 0.15 }}
+                  style={{
+                    opacity: roll
+                      ? index === 0
+                        ? 1
+                        : Math.max(0.3, 1 - index * 0.15)
+                      : 0.15,
+                  }}
                 >
                   {roll ? (
                     <>
-                      <span className="font-semibold justify-self-start">{roll.config}</span>
-                      <span className="font-bold text-black justify-self-center">{roll.total}</span>
-                      <span className="text-black/50 text-xs font-mono justify-self-end truncate">
+                      <span className='font-semibold justify-self-start'>
+                        {roll.config}
+                      </span>
+                      <span className='font-bold text-black justify-self-center'>
+                        {roll.total}
+                      </span>
+                      <span className='text-black/50 text-xs font-mono justify-self-end truncate'>
                         {formatRollBreakdown(roll.rolls, false)}
                       </span>
                     </>
                   ) : (
-                    <span className="text-black/20 text-xs col-span-3">—</span>
+                    <span className='text-black/20 text-xs col-span-3'>—</span>
                   )}
                 </div>
               );
@@ -218,40 +237,40 @@ export default function Home() {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/40 z-40 animate-fade-in"
+            className='fixed inset-0 bg-black/40 z-40 animate-fade-in'
             onClick={() => setSelectedRoll(null)}
           />
 
           {/* Sheet */}
-          <div className="fixed bottom-0 left-0 right-0 md:left-1/2 md:-translate-x-1/2 md:max-w-md bg-white border-t-4 border-black rounded-t-2xl z-50 max-h-[80vh] flex flex-col animate-slide-up">
+          <div className='fixed bottom-0 left-0 right-0 md:left-1/2 md:-translate-x-1/2 md:max-w-md  border-t-4 border-black rounded-t-2xl z-50 max-h-[80vh] flex flex-col animate-slide-up'>
             {/* Header */}
-            <div className="flex justify-between items-start p-6 border-b-2 border-black/10">
-              <div className="flex-1">
-                <div className="text-5xl font-bold text-accent finger-paint-regular mb-2 leading-none">
+            <div className='flex justify-between items-start p-6 border-b-2 border-black/10'>
+              <div className='flex-1'>
+                <div className='text-5xl font-bold text-accent finger-paint-regular mb-2 leading-none'>
                   {selectedRoll.total}
                 </div>
-                <div className="text-xs font-medium text-black/40 uppercase tracking-wide">
+                <div className='text-xs font-medium text-black/40 uppercase tracking-wide'>
                   {selectedRoll.config}
                 </div>
               </div>
               <button
                 onClick={() => setSelectedRoll(null)}
-                className="text-xl text-black/40 hover:text-black w-8 h-8 flex items-center justify-center flex-shrink-0 ml-4"
+                className='text-xl text-black/40 hover:text-black w-8 h-8 flex items-center justify-center flex-shrink-0 ml-4'
               >
                 ×
               </button>
             </div>
 
             {/* Individual Die Values */}
-            <div className="p-6 pb-12 overflow-y-auto">
-              <h3 className="text-xs font-semibold text-black mb-3 uppercase tracking-widest">
+            <div className='p-6 pb-12 overflow-y-auto'>
+              <h3 className='text-xs font-semibold text-black mb-3 uppercase tracking-widest'>
                 Rolls
               </h3>
-              <div className="flex flex-wrap gap-1.5 pb-8">
+              <div className='flex flex-wrap gap-1.5 pb-8'>
                 {selectedRoll.rolls.map((value, idx) => (
                   <div
                     key={idx}
-                    className="w-12 h-12 border border-black/40 rounded flex items-center justify-center font-bold text-black"
+                    className='w-12 h-12 border border-black/40 rounded flex items-center justify-center font-bold text-black'
                   >
                     {value}
                   </div>
