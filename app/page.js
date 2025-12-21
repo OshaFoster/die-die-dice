@@ -149,7 +149,7 @@ export default function Home() {
         {/* Roll Button */}
         <button
           onClick={rollDice}
-          className="w-full py-5 bg-black text-white text-2xl font-bold tracking-wider active:bg-zinc-900 active:scale-[0.99] active:translate-y-[1px] transition-all duration-100 mb-6 rounded-xl finger-paint-regular focus:outline-none"
+          className="w-full py-5 bg-black text-white text-2xl font-bold tracking-wider active:bg-zinc-700 active:scale-[0.97] active:translate-y-[2px] transition-all duration-100 mb-6 rounded-xl finger-paint-regular focus:outline-none"
         >
           Roll
         </button>
@@ -161,7 +161,10 @@ export default function Home() {
               {currentRoll ? currentRoll.config : '\u00A0'}
             </div>
             <div className="text-8xl font-bold mb-4 leading-none finger-paint-regular">
-              <span className={currentRoll ? 'text-accent' : 'text-black/10'}>
+              <span
+                key={currentRoll?.timestamp}
+                className={currentRoll ? 'text-accent animate-pop-in' : 'text-black/10'}
+              >
                 {currentRoll ? currentRoll.total : '—'}
               </span>
             </div>
