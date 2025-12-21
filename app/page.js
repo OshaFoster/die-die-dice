@@ -101,10 +101,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-6">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4">
       <main className="w-full max-w-md">
         {/* Title */}
-        <h1 className="text-4xl font-bold text-black mb-8 text-center tracking-tight finger-paint-regular">
+        <h1 className="text-4xl font-bold text-black mb-12 text-center tracking-tight finger-paint-regular">
           Die, Die, Dice!
         </h1>
 
@@ -175,7 +175,7 @@ export default function Home() {
         </div>
 
         {/* Roll History - Always visible */}
-        <div>
+        <div className="mb-8">
           <h2 className="text-xs font-semibold text-black mb-3 uppercase tracking-widest">
             Previous Rolls
           </h2>
