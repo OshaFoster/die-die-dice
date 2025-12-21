@@ -109,7 +109,7 @@ export default function Home() {
         </h1>
 
         {/* Inputs */}
-        <div className="flex flex-row gap-2.5 md:flex-col mb-5">
+        <div className="flex gap-2.5 mb-5">
           <div className="flex-1">
             <label htmlFor="numDice" className="block text-xs font-semibold text-black mb-1 uppercase tracking-wide">
               Number of Dice
@@ -149,7 +149,7 @@ export default function Home() {
         {/* Roll Button */}
         <button
           onClick={rollDice}
-          className="w-full py-5 bg-black text-white text-2xl font-bold tracking-wider active:bg-zinc-700 active:scale-[0.97] active:translate-y-[2px] transition-all duration-100 mb-6 rounded-xl finger-paint-regular focus:outline-none"
+          className="w-full py-5 bg-black text-white text-2xl font-bold tracking-wider active:bg-zinc-800 active:scale-[0.98] active:translate-y-[1.5px] transition-all duration-100 mb-6 rounded-xl finger-paint-regular focus:outline-none"
         >
           Roll
         </button>
