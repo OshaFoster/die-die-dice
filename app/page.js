@@ -116,8 +116,8 @@ export default function Home() {
   };
 
   return (
-    <div className='min-h-screen flex flex-col items-center px-4 pt-10 pb-12 sm:pt-14'>
-      <header className='w-full max-w-md text-center py-10 sm:py-10'>
+    <div className='min-h-screen flex flex-col items-center px-4 pt-8 pb-12 sm:pt-14'>
+      <header className='w-full max-w-md text-center py-6 sm:py-12'>
         <h1 className='text-4xl sm:text-5xl font-bold text-black tracking-tight finger-paint-regular'>
           Die, Die, Dice!
         </h1>
