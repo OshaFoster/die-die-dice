@@ -255,7 +255,7 @@ export default function Home() {
           />
 
           {/* Sheet */}
-          <div className='fixed bottom-0 left-0 right-0 md:left-1/2 md:-translate-x-1/2 md:max-w-md  border-t-4 border-black rounded-t-2xl z-50 max-h-[80vh] flex flex-col animate-slide-up'>
+          <div className='fixed bottom-0 left-0 right-0 md:left-1/2 md:-translate-x-1/2 md:max-w-md bg-white border-t-4 border-black rounded-t-2xl z-50 max-h-[80vh] flex flex-col animate-slide-up'>
             {/* Header */}
             <div className='flex justify-between items-start p-6 border-b-2 border-black/10'>
               <div className='flex-1'>
