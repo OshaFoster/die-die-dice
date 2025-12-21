@@ -12,11 +12,17 @@ export default function Home() {
   const sidesInputRef = useRef(null);
 
   const clamp = (value, min, max) => {
-    const num = parseInt(value) || min;
+    const num = parseInt(value, 10);
+    if (Number.isNaN(num)) {
+      return min;
+    }
     return Math.max(min, Math.min(max, num));
   };
 
   const formatRollBreakdown = (rolls, includeDiceCount = true) => {
+    if (!rolls?.length) {
+      return '—';
+    }
     if (rolls.length <= 6) {
       return rolls.join(' • ');
     }
@@ -79,8 +85,15 @@ export default function Home() {
   };
 
   const rollDice = () => {
-    const diceCount = numDice === '' ? 1 : parseInt(numDice);
-    const sidesCount = numSides === '' ? 2 : parseInt(numSides);
+    const diceCount = clamp(numDice, 1, 50);
+    const sidesCount = clamp(numSides, 2, 100);
+
+    if (numDice !== diceCount) {
+      setNumDice(diceCount);
+    }
+    if (numSides !== sidesCount) {
+      setNumSides(sidesCount);
+    }
 
     const rolls = [];
     let total = 0;
@@ -103,12 +116,13 @@ export default function Home() {
   };
 
   return (
-    <div className='min-h-screen  flex items-center justify-center px-4'>
-      <main className='w-full max-w-md'>
-        {/* Title */}
-        <h1 className='text-4xl font-bold text-black mb-8 md:mb-12 text-center tracking-tight finger-paint-regular'>
+    <div className='min-h-screen flex flex-col items-center px-4 pt-10 pb-12 sm:pt-14'>
+      <header className='w-full max-w-md text-center py-10 sm:py-10'>
+        <h1 className='text-4xl sm:text-5xl font-bold text-black tracking-tight finger-paint-regular'>
           Die, Die, Dice!
         </h1>
+      </header>
+      <main className='w-full max-w-md mt-8'>
         {/* Inputs */}
         <div className='flex gap-2.5 mb-5'>
           <div className='flex-1'>
@@ -184,51 +198,50 @@ export default function Home() {
         </div>
 
         {/* Roll History - Always visible */}
-        <div className='mb-6 md:mb-8'>
-          <h2 className='text-xs font-semibold text-black mb-3 uppercase tracking-widest'>
-            Previous Rolls
-          </h2>
-          <div className='space-y-2'>
-            {[...Array(5)].map((_, index) => {
-              const roll = rollHistory[index];
-              return (
-                <div
-                  key={roll?.timestamp || `empty-${index}`}
-                  onClick={() => roll && setSelectedRoll(roll)}
-                  className={`relative grid grid-cols-3 items-center px-3.5 h-[40px] text-sm transition-opacity rounded-md ${
-                    roll && index === 0
-                      ? 'border-2 border-black'
-                      : roll
-                      ? 'border border-black/30'
-                      : 'border border-black/10'
-                  } ${roll ? 'cursor-pointer active:scale-[0.99]' : ''}`}
-                  style={{
-                    opacity: roll
-                      ? index === 0
-                        ? 1
-                        : Math.max(0.3, 1 - index * 0.15)
-                      : 0.15,
-                  }}
-                >
-                  {roll ? (
-                    <>
-                      <span className='font-semibold justify-self-start'>
-                        {roll.config}
-                      </span>
-                      <span className='font-bold text-black justify-self-center'>
-                        {roll.total}
-                      </span>
-                      <span className='text-black/50 text-xs font-mono justify-self-end truncate'>
-                        {formatRollBreakdown(roll.rolls, false)}
-                      </span>
-                    </>
-                  ) : (
-                    <span className='text-black/20 text-xs col-span-3'>—</span>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+
+        <h2 className='text-xs font-semibold text-black mb-3 uppercase tracking-widest'>
+          Previous Rolls
+        </h2>
+        <div className='space-y-2'>
+          {[...Array(5)].map((_, index) => {
+            const roll = rollHistory[index];
+            return (
+              <div
+                key={roll?.timestamp || `empty-${index}`}
+                onClick={() => roll && setSelectedRoll(roll)}
+                className={`relative grid grid-cols-3 items-center px-3.5 h-[40px] text-sm transition-opacity rounded-md ${
+                  roll && index === 0
+                    ? 'border-2 border-black'
+                    : roll
+                    ? 'border border-black/30'
+                    : 'border border-black/10'
+                } ${roll ? 'cursor-pointer active:scale-[0.99]' : ''}`}
+                style={{
+                  opacity: roll
+                    ? index === 0
+                      ? 1
+                      : Math.max(0.3, 1 - index * 0.15)
+                    : 0.15,
+                }}
+              >
+                {roll ? (
+                  <>
+                    <span className='font-semibold justify-self-start'>
+                      {roll.config}
+                    </span>
+                    <span className='font-bold text-black justify-self-center'>
+                      {roll.total}
+                    </span>
+                    <span className='text-black/50 text-xs font-mono justify-self-end truncate'>
+                      {formatRollBreakdown(roll.rolls, false)}
+                    </span>
+                  </>
+                ) : (
+                  <span className='text-black/20 text-xs col-span-3'>—</span>
+                )}
+              </div>
+            );
+          })}
         </div>
       </main>
 
