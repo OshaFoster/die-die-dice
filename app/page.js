@@ -116,13 +116,13 @@ export default function Home() {
   };
 
   return (
-    <div className='min-h-screen flex flex-col items-center px-4 pt-8 pb-12 sm:pt-14'>
-      <header className='w-full max-w-md text-center py-6 sm:py-12'>
+    <div className='min-h-screen flex flex-col items-center px-4 pt-6 pb-12 sm:pt-10'>
+      <header className='w-full max-w-md text-center py-4 sm:py-8'>
         <h1 className='text-4xl sm:text-5xl font-bold text-black tracking-tight finger-paint-regular'>
           Die, Die, Dice!
         </h1>
       </header>
-      <main className='w-full max-w-md mt-8'>
+      <main className='w-full max-w-md mt-6 sm:mt-8'>
         {/* Inputs */}
         <div className='flex gap-2.5 mb-5'>
           <div className='flex-1'>
