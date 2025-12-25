@@ -226,8 +226,11 @@ export default function Home() {
               >
                 {roll ? (
                   <>
-                    <span className='font-semibold justify-self-start'>
+                    <span className='font-semibold justify-self-start flex items-center gap-1.5'>
                       {roll.config}
+                      <svg className='w-3 h-3 text-black/40' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+                      </svg>
                     </span>
                     <span className='font-bold text-black justify-self-center'>
                       {roll.total}
